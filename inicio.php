@@ -1,3 +1,13 @@
+<?php
+require("validaciones/validarImagen.php");
+if(isset($_POST['SaveImage'])){
+  $imagen = $file_name;
+  $comentario=$_POST['cometario'];
+  
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -114,13 +124,13 @@
                             </div>
                         </div>
                         <label for="">Comentario</label>
-                        <textarea name="" id="" cols="30" rows="5" class="form-control"></textarea>
+                        <textarea name="cometario" id="" cols="30" rows="5" class="form-control"></textarea>
                     </div>
                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Guardar cambios</button>
+                    <button type="button" name="SaveImage" class="btn btn-primary">Guardar cambios</button>
                 </div>
             </div>
         </div>

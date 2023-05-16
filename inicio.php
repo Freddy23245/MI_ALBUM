@@ -1,8 +1,14 @@
 <?php
+ require_once("Datos/IniciarSession.php");
 require("validaciones/validarImagen.php");
 if(isset($_POST['SaveImage'])){
   $imagen = $file_name;
   $comentario=$_POST['cometario'];
+  $idUsuario = $_SESSION['log']['id_usuario'];
+
+var_dump($idUsuario);
+
+  ImagenesControlador::AgregarImagen($imagen,$comentario,$idUsuario);
   
 }
 
@@ -110,28 +116,28 @@ if(isset($_POST['SaveImage'])){
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                   <form action="" method="post">
+                   <form action="" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="">Imagen</label>
                         <div class="mb-4 d-flex justify-content-center">
-                            <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
-                            alt="example placeholder" style="width: 250px;" />
+                           
                         </div>
                         <div class="d-flex justify-content-center">
                             <div class="btn btn-primary btn-rounded">
-                                <label class="form-label text-white m-1" for="customFile1">Choose file</label>
-                                <input type="file" class="form-control d-none" id="customFile1" />
+                                <label class="form-label text-white m-1" for="customFile1">Agregar imagen</label>
+                                <input type="file" class="form-control d-none" multiple placeholder="Añadir imagenes" id="customFile1" />
                             </div>
                         </div>
                         <label for="">Comentario</label>
                         <textarea name="cometario" id="" cols="30" rows="5" class="form-control"></textarea>
                     </div>
-                   </form>
+                   
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary">Cerrar</button>
-                    <button type="button" name="SaveImage" class="btn btn-primary">Guardar cambios</button>
+                    <button type="submit" name="SaveImage" class="btn btn-primary">Guardar cambios</button>
                 </div>
+                </form>
             </div>
         </div>
       </div>

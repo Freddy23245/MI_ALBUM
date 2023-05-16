@@ -1,4 +1,5 @@
 <?php
+ session_start();
   require_once("Controladores/UsuarioController.php");
 if(isset($_POST['login'])){
   
@@ -19,6 +20,7 @@ if(isset($_POST['login'])){
       "usuario"=>$user->GetUsuario(),
       "password"=>$user->GetContraseña(),
     );
+    
     header("location:inicio.php");
   }
 

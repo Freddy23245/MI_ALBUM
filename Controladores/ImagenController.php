@@ -1,7 +1,7 @@
 <?php
 require_once("Datos/imagendao.php");
 class ImagenesControlador{
-    public static function agregar_prod($imagen,$comentario,$idUsuario)
+    public static function AgregarImagen($imagen,$comentario,$idUsuario)
     {
         $obj_prod=new Imagenes();
 

@@ -34,6 +34,23 @@ class ImagenesDao extends Conexion{
     
         return  $resultado;
     }
+
+    public static function ListarImagenes()
+    {
+        $query="Select imagen,comentario,fecha from imagenes";
+  
+        self::getConnection();
+  
+        $resultado=self::$con->prepare($query);
+  
+        $resultado->execute();
+  
+        $filas=$resultado->fetchAll();
+  
+        return $filas;
+  
+    }
+
 }
 
 ?>

@@ -1,17 +1,30 @@
 <?php
  require_once("Datos/IniciarSession.php");
 require("validaciones/validarImagen.php");
-if(isset($_POST['SaveImage'])){
-  $imagen = $file_name;
-  $comentario=$_POST['cometario'];
-  $idUsuario = $_SESSION['log']['id_usuario'];
+require_once("Controladores/ImagenController.php");
 
-var_dump($idUsuario);
+if(isset($_POST['SaveImage'])){
+  // $imagen = $_FILES['Foto']['name'];
+  $fecha = new DateTime();
+  $nombreArchivo =($_FILES['Foto'] != "")?$fecha->getTimestamp()."_".$_FILES['Foto']["name"]:"imagen.jpg";
+  $tempFoto = $_FILES['Foto']['tmp_name'];
+  if($tempFoto != "")
+  {
+    move_uploaded_file($tempFoto,"img/".$nombreArchivo);
+  }
+
+  $imagen = $nombreArchivo;
+  $comentario=$_POST['cometario'];
+  $idUsuario = 7;
+
+
+
 
   ImagenesControlador::AgregarImagen($imagen,$comentario,$idUsuario);
-  
+  header("location:inicio.php");
+ 
 }
-
+$fila = ImagenesControlador::MostrarImagenes();
 
 ?>
 <!DOCTYPE html>
@@ -78,31 +91,53 @@ var_dump($idUsuario);
             </div>
           </div>
         </section>
-      
+        
         <div class="album py-5 bg-body-tertiary">
+        
           <div class="container">
-      
+            
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-              <div class="col">
+            <?php foreach($fila as $p){?>  
+            <div class="col">
+             
                 <div class="card shadow-sm">
-                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  
+                  <img src="img/<?php echo $p['imagen']?>" class="img-thumbnail" width="100%" height="20%">
                   <div class="card-body">
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><?php echo $p['comentario']?>.</p>
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
                         <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                         <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                       </div>
-                      <small class="text-body-secondary">9 mins</small>
+                      <small class="text-body-secondary"><?php 
+                      $fechaActual = date('d/m/y');
+                      $segundos = strtotime($p['fecha']) - strtotime($fechaActual);
+                       $horas = $segundos /3600;
+                       $fecha1 = new DateTime($p['fecha']);
+                      $fecha2 = new DateTime($fechaActual);
+                       $intervalo = $fecha1->diff($fecha2);
+                       $diferencia_en_minutos = $intervalo->i;
+
+                     if($segundos > 60)
+                     {
+                      echo $diferencia_en_minutos;
+                     }
+                    
+
+
+                      ?></small>
                     </div>
                   </div>
                 </div>
+                
               </div>
-
+              <?php }?>
             </div>
           </div>
+          
         </div>
-      
+        
       </main>
       <!-- InicioModal -->
 
@@ -123,10 +158,9 @@ var_dump($idUsuario);
                            
                         </div>
                         <div class="d-flex justify-content-center">
-                            <div class="btn btn-primary btn-rounded">
-                                <label class="form-label text-white m-1" for="customFile1">Agregar imagen</label>
-                                <input type="file" class="form-control d-none" multiple placeholder="Añadir imagenes" id="customFile1" />
-                            </div>
+                            
+                                <input type="file" accept="image/*" class="form-control" name="Foto" id="">
+                            
                         </div>
                         <label for="">Comentario</label>
                         <textarea name="cometario" id="" cols="30" rows="5" class="form-control"></textarea>

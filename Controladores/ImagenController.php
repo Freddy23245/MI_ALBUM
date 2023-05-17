@@ -13,9 +13,9 @@ class ImagenesControlador{
         return ImagenesDao::AgregarImagen($obj_prod);
 
     }
-    public static function MostrarImagenes()
+    public static function MostrarImagenes($id)
     {
-        return ImagenesDao::ListarImagenes();
+        return ImagenesDao::ListarImagenes($id);
     }
 }
 ?>

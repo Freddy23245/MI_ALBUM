@@ -19,6 +19,7 @@ if(isset($_POST['login'])){
       "correo"=>$user->GetCorreo(),
       "usuario"=>$user->GetUsuario(),
       "password"=>$user->GetContraseña(),
+      "imagen"=>$user->GetImagen(),
     );
     
     header("location:inicio.php");
@@ -36,7 +37,8 @@ if(isset($_POST['login'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>MI ALBUN</title>
+    <link rel="icon" href="img/icono.ico">
+    <title>MI ALBUM</title>
 </head>
 <body>
         <!-- Custom styles for this template -->
@@ -110,7 +112,8 @@ if(isset($_POST['login'])){
       </div>
   
       <button class="w-100 btn btn-lg btn-primary" type="submit" name="login">Ingresar</button>
-      <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2023</p>
+      <a href="registro.php">Sos Nuevo? Registrate Paaaadreeee ;)</a>
+      <p class="mt-5 mb-6 text-body-secondary">&copy; 2017–2023</p>
     </form>
   </main>
 

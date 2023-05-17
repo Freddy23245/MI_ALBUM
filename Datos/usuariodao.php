@@ -17,7 +17,7 @@ require_once("Datos/Conexion.php");
 
         public static function AgregarUsuarios($usuario)
         {
-            $query = "insert into usuarios(nombre,apellido,correo,usuario,password) values(:nombre,:apellido,:correo,:usuario,:pass)";
+            $query = "insert into usuarios(nombre,apellido,correo,usuario,password,imagen) values(:nombre,:apellido,:correo,:usuario,:pass,:imagen)";
 
             self::getConnection();
             $resultado=self::$con->prepare($query);
@@ -27,7 +27,7 @@ require_once("Datos/Conexion.php");
             $resultado->bindValue(":correo",$usuario->GetCorreo());
             $resultado->bindValue(":usuario",$usuario->GetUsuario());
             $resultado->bindValue(":pass",$usuario->GetContraseña());
-          
+            $resultado->bindValue(":imagen",$usuario->GetImagen());
 
             $resultado->execute();
         
@@ -88,7 +88,7 @@ require_once("Datos/Conexion.php");
             $usuario->SetCorreo($filas["correo"]);
             $usuario->SetUsuario($filas["usuario"]);
             $usuario->SetContraseña($filas["password"]);
-            //$usuario->SetActivo($filas["id_tipo"]);
+            $usuario->SetImagen($filas["imagen"]);
 
 
         return $usuario;

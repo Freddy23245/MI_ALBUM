@@ -6,6 +6,7 @@ class Usuarios{
     private $correo;
     private $usuario;
     private $contraseña;
+    private $imagen;
     private $activo;
 
     public function GetIdUsuario(){
@@ -52,6 +53,13 @@ class Usuarios{
     }
     public function SetActivo($activo){
         $this->activo = $activo;
+    }
+
+    public function GetImagen(){
+        return $this->imagen;
+    }
+    public function SetImagen($imagen){
+        $this->imagen = $imagen;
     }
 
 

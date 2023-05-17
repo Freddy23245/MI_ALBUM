@@ -3,7 +3,7 @@
 
  class UsuarioControlador{
   
-    public static function Insertar($nombre,$apellido,$correo,$usuario,$contraseña)
+    public static function Insertar($nombre,$apellido,$correo,$usuario,$contraseña,$imagen)
     {
         $obj_usuario=new Usuarios();
 
@@ -11,7 +11,9 @@
         $obj_usuario->SetApellido($apellido);
         $obj_usuario->SetCorreo($correo);
         $obj_usuario->SetUsuario($usuario);
-         $obj_usuario->SetContraseña($contraseña);
+        $obj_usuario->SetContraseña($contraseña);
+        $obj_usuario->SetImagen($imagen);
+      
       //   $obj_usuario->SetActivo($activo);
 
      return   UsuariosDao::AgregarUsuarios($obj_usuario);

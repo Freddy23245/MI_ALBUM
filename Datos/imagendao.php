@@ -37,7 +37,7 @@ class ImagenesDao extends Conexion{
 
     public static function ListarImagenes($id)
     {
-        $query="Select imagen,comentario,fecha from imagenes where id_usuario = :id_usuario";
+        $query="Select idImagen,imagen,comentario,fecha from imagenes where id_usuario = :id_usuario";
   
         self::getConnection();
   
@@ -47,7 +47,7 @@ class ImagenesDao extends Conexion{
 
         $resultado->execute();
   
-        $filas=$resultado->fetchAll();
+        $filas = $resultado->fetchAll();
   
         return $filas;
   

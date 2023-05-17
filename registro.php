@@ -3,7 +3,7 @@ require("Controladores/UsuarioController.php");
 
 if(isset($_POST['Guardar'])){
   $fecha = new DateTime();
-  $nombreArchivo =($_FILES['Imagen'] != "") ? $fecha->getTimestamp()."_".$_FILES['Imagen']["name"]:"imagen.jpg";
+  $nombreArchivo =($_FILES['Imagen'] != "") ? $fecha->getTimestamp()."_".$_FILES['Imagen']["name"]:"default.png";
   $tempFoto = $_FILES['Imagen']['tmp_name'];
   if($tempFoto != "")
   {

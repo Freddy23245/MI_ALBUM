@@ -44,10 +44,10 @@ $fila = ImagenesControlador::MostrarImagenes($_SESSION['log']["id_usuario"]);
        </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" class="nav-link px-2 link-secondary">Hola</a></li>
+          <!-- <li><a href="#" class="nav-link px-2 link-secondary">Hola</a></li>
           <li><a href="#" class="nav-link px-2 link-body-emphasis">Hola2</a></li>
           <li><a href="#" class="nav-link px-2 link-body-emphasis">Customers</a></li>
-          <li><a href="#" class="nav-link px-2 link-body-emphasis">Products</a></li>
+          <li><a href="#" class="nav-link px-2 link-body-emphasis">Products</a></li> -->
         </ul>
 
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
@@ -112,7 +112,8 @@ $fila = ImagenesControlador::MostrarImagenes($_SESSION['log']["id_usuario"]);
                     <p class="card-text"><?php echo $p['comentario']?>.</p>
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
+                        <a  class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#MODAL">Ver</a>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
                         <button type="button" class="btn btn-sm btn-outline-secondary">Eliminar</button>
                         <button type="button" class="btn btn-sm btn-outline-secondary">Descargar</button>
                       </div>
@@ -122,6 +123,35 @@ $fila = ImagenesControlador::MostrarImagenes($_SESSION['log']["id_usuario"]);
                 </div>
                 
               </div>
+              
+     <!--MODAL 2-->
+     <div class="modal" tabindex="-1" role="dialog" id="MODAL">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class=" btn-close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="img/Albums/<?php echo $p['imagen']?>" alt="First slide">
+    </div>
+    
+  </div>
+</div>
+      </div>
+      <div class="modal-footer">
+        
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+     <!--FIN MODAL 2-->
               <?php }?>
             </div>
           </div>
@@ -170,6 +200,8 @@ $fila = ImagenesControlador::MostrarImagenes($_SESSION['log']["id_usuario"]);
 
       <!--FinCarrousel-->
       <!--FinModal-->
+
+
       <footer class="text-body-secondary py-5">
         <div class="container">
           <p class="float-end mb-1">

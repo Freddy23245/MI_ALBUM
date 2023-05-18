@@ -19,6 +19,23 @@
      return   UsuariosDao::AgregarUsuarios($obj_usuario);
 
     }
+    public static function Editar($idUsuario,$nombre,$apellido,$correo,$usuario,$contraseña,$imagen)
+    {
+        $obj_usuario=new Usuarios();
+
+        $obj_usuario->SetIdUsuario($idUsuario);
+        $obj_usuario->SetNombre($nombre);
+        $obj_usuario->SetApellido($apellido);
+        $obj_usuario->SetCorreo($correo);
+        $obj_usuario->SetUsuario($usuario);
+        $obj_usuario->SetContraseña($contraseña);
+        $obj_usuario->SetImagen($imagen);
+      
+      //   $obj_usuario->SetActivo($activo);
+
+     return   UsuariosDao::EditarUsuarios($obj_usuario);
+
+    }
     public static function login($usuario,$password)
     {
         $obj_usuario=new Usuarios();

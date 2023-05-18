@@ -33,6 +33,24 @@ require_once("Datos/Conexion.php");
         
             return  $resultado;
         }
+        public static function EditarUsuarios($usuario)
+        {
+            $query = "update usuarios set nombre =:nombre, apellido = :apellido, correo = :correo,usuario = :usuario,  password =:pass, imagen = :imagen where id_usuario = :id_usuario";
+
+            self::getConnection();
+            $resultado=self::$con->prepare($query);
+            $resultado->bindValue(":id_usuario",$usuario->GetIdUsuario());
+            $resultado->bindValue(":nombre",$usuario->GetNombre());
+            $resultado->bindValue(":apellido",$usuario->GetApellido());
+            $resultado->bindValue(":correo",$usuario->GetCorreo());
+            $resultado->bindValue(":usuario",$usuario->GetUsuario());
+            $resultado->bindValue(":pass",$usuario->GetContraseña());
+            $resultado->bindValue(":imagen",$usuario->GetImagen());
+
+            $resultado->execute();
+        
+            return  $resultado;
+        }
 
         public static function Login($usuario)
     {

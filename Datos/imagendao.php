@@ -53,6 +53,36 @@ class ImagenesDao extends Conexion{
   
     }
 
+    public static function Editar($img)
+    {
+
+        $query = "update imagenes set imagen =:imagen,comentario = :comentario where idImagen = :idImagen";
+
+        self::getConnection();
+
+        $resultado = self::$con->prepare($query);
+
+        $resultado->bindValue(":idImagen",$img->GetidImagen());
+        $resultado->bindValue(":imagen",$img->GetImagen());
+        $resultado->bindValue(":comentario",$img->GetComentario());
+
+        $resultado->execute();
+    }
+
+    public static function Eliminar($id)
+    {
+
+        $query = "delete from imagenes where idImagen = :idImagen";
+
+        self::getConnection();
+
+        $resultado = self::$con->prepare($query);
+
+        $resultado->bindValue(":idImagen",$id);
+
+        $resultado->execute();
+    }
+
 }
 
 ?>

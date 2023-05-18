@@ -58,10 +58,10 @@ $fila = ImagenesControlador::MostrarImagenes($_SESSION['log']["id_usuario"]);
 
         <div class="dropdown text-end">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="data:image/jpg;base64,<?php echo base64_encode($_SESSION['log']['imagen']);?>" alt="mdo" width="60" height="60" class="rounded-circle">
+            <img src="img/perf/<?php echo ($_SESSION['log']['imagen']);?>" alt="mdo" width="60" height="60" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small">
-            <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
+            <li><a class="dropdown-item" href="perfil.php">Mi Perfil</a></li>
             <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Agregar Nueva Imagen</a></li>
             <!-- <li><a class="dropdown-item" href="#">Profile</a></li> -->
             <li><hr class="dropdown-divider"></li>
@@ -114,9 +114,17 @@ $fila = ImagenesControlador::MostrarImagenes($_SESSION['log']["id_usuario"]);
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
                         <a  class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#MODAL">Ver</a>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Eliminar</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Descargar</button>
+                        <form action="" method="post">
+                        <input type="hidden" name="idEditar" value="<?php echo $p['idImagen']?>">
+                        <a  class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#ModalEditar">Editar</a>
+                        </form>
+                        
+                        <form action="EliminarImagen.php" method="post">
+                        <input type="hidden" name="idEliminar" value="<?php echo $p['idImagen']?>">
+                        <button type="submit" class="btn btn-sm btn-outline-secondary">Eliminar</button>
+                        </form>
+                        <a href="img/Albums/<?php echo $p['imagen']?>" download="MI ALBUM Image" class="btn btn-sm btn-outline-secondary">Descargar</a>
+                        
                       </div>
                       <small class="text-body-secondary"><?php echo date("d-m-Y", strtotime($p['fecha']));?></small>
                     </div>
@@ -175,7 +183,7 @@ $fila = ImagenesControlador::MostrarImagenes($_SESSION['log']["id_usuario"]);
                         </div>
                         <div class="d-flex justify-content-center">
                             
-                                <input type="file" accept="image/*" class="form-control" name="Foto" id="">
+                                <input type="file" accept="image/*" class="form-control" name="Foto" id="" required>
                             
                         </div>
                         <label for="">Comentario</label>
@@ -185,7 +193,7 @@ $fila = ImagenesControlador::MostrarImagenes($_SESSION['log']["id_usuario"]);
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary">Cerrar</button>
-                    <button type="submit" name="SaveImage" class="btn btn-primary">Guardar cambios</button>
+                    <button type="submit" name="SaveImage" class="btn btn-primary">Guardar</button>
                 </div>
                 </form>
             </div>
@@ -196,7 +204,45 @@ $fila = ImagenesControlador::MostrarImagenes($_SESSION['log']["id_usuario"]);
 
       <!--FinCarrousel-->
       <!--FinModal-->
+      
+       <!--Modal Editar-->
+       <div class="modal" tabindex="1" id="ModalEditar">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Imagen</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                   <form action="" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="">Imagen</label>
+                        <div class="mb-4 d-flex justify-content-center">
+                           
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            
+                                <input type="file" accept="image/*" class="form-control" name="Foto" id="" required>
+                            
+                        </div>
+                        <label for="">Comentario</label>
+                        <textarea name="cometario" id="" cols="30" rows="5" class="form-control"></textarea>
+                    </div>
+                   
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary">Cerrar</button>
+                    <button type="submit" name="SaveChages" class="btn btn-primary">Guardar cambios</button>
+                </div>
+                </form>
+            </div>
+        </div>
+      </div>
+      <!--Carrousel-->
 
+
+      <!--FinCarrousel-->
+      <!--FinModal-->
 
       <footer class="text-body-secondary py-5">
         <div class="container">

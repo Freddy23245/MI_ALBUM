@@ -2,13 +2,13 @@
 require("Controladores/UsuarioController.php");
 
 if(isset($_POST['Guardar'])){
-  // $fecha = new DateTime();
-  // $nombreArchivo =($_FILES['Foto'] != "")?$fecha->getTimestamp()."_".$_FILES['Foto']["name"]:"default.png";
-  // $tempFoto = $_FILES['Foto']['tmp_name'];
-  // if($tempFoto != "")
-  // {
-  //   move_uploaded_file($tempFoto,"img/perf/".$nombreArchivo);
-  // }
+  $fecha = new DateTime();
+  $nombreArchivo =($_FILES['Imagen'] != "")?$fecha->getTimestamp()."_".$_FILES['Imagen']["name"]:"default.png";
+  $tempFoto = $_FILES['Imagen']['tmp_name'];
+  if($tempFoto != "")
+  {
+    move_uploaded_file($tempFoto,"img/perf/".$nombreArchivo);
+  }
   
 
 $nombre = $_POST["nombre"];
@@ -18,7 +18,7 @@ $usuario = $_POST["user"];
 $password = $_POST["pass"];
 $con_password=$_POST["con_pass"];
 $email=$_POST["email"];
-$imagen = addslashes(file_get_contents($_FILES['Imagen']['tmp_name']));
+$imagen = $nombreArchivo;
 // $Activo=1;
 
 $pass_hash=sha1($password);

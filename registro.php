@@ -2,13 +2,13 @@
 require("Controladores/UsuarioController.php");
 
 if(isset($_POST['Guardar'])){
-  $fecha = new DateTime();
-  $nombreArchivo =($_FILES['Imagen'] != "") ? $fecha->getTimestamp()."_".$_FILES['Imagen']["name"]:"default.png";
-  $tempFoto = $_FILES['Imagen']['tmp_name'];
-  if($tempFoto != "")
-  {
-    move_uploaded_file($tempFoto,"img/perf/".$nombreArchivo);
-  }
+  // $fecha = new DateTime();
+  // $nombreArchivo =($_FILES['Foto'] != "")?$fecha->getTimestamp()."_".$_FILES['Foto']["name"]:"default.png";
+  // $tempFoto = $_FILES['Foto']['tmp_name'];
+  // if($tempFoto != "")
+  // {
+  //   move_uploaded_file($tempFoto,"img/perf/".$nombreArchivo);
+  // }
   
 
 $nombre = $_POST["nombre"];
@@ -18,7 +18,7 @@ $usuario = $_POST["user"];
 $password = $_POST["pass"];
 $con_password=$_POST["con_pass"];
 $email=$_POST["email"];
-$imagen = $nombreArchivo;
+$imagen = addslashes(file_get_contents($_FILES['Imagen']['tmp_name']));
 // $Activo=1;
 
 $pass_hash=sha1($password);
@@ -44,7 +44,7 @@ header("location:registro.php");
       
           <div class="container">
             <h4>Registro de Usuario</h4>
-            <form action="" method="post" class="">
+            <form action="" method="post" class="" enctype="multipart/form-data">
               <div class="mb-3 col-md-6">
                
                 <input name="nombre" type="text" class="form-control"  aria-describedby="NamelHelp" placeholder="Nombre">

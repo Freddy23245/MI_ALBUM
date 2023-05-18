@@ -23,6 +23,7 @@ if(isset($_POST['SaveImage'])){
  
 }
 $fila = ImagenesControlador::MostrarImagenes($_SESSION['log']["id_usuario"]);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,7 +58,7 @@ $fila = ImagenesControlador::MostrarImagenes($_SESSION['log']["id_usuario"]);
 
         <div class="dropdown text-end">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="img/perf/<?php echo $_SESSION['log']["imagen"]?>" alt="mdo" width="60" height="60" class="rounded-circle">
+            <img src="data:image/jpg;base64,<?php echo base64_encode($_SESSION['log']['imagen']);?>" alt="mdo" width="60" height="60" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small">
             <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
@@ -75,7 +76,7 @@ $fila = ImagenesControlador::MostrarImagenes($_SESSION['log']["id_usuario"]);
       
       <main>
       
-        <section class="py-5 text-center container">
+        <section class="py-0 text-center container">
           <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
               <h1 class="fw-light">MI ALBUM</h1>
@@ -128,12 +129,7 @@ $fila = ImagenesControlador::MostrarImagenes($_SESSION['log']["id_usuario"]);
      <div class="modal" tabindex="-1" role="dialog" id="MODAL">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class=" btn-close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+      
       <div class="modal-body">
       <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">

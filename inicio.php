@@ -24,6 +24,9 @@ if(isset($_POST['SaveImage'])){
 }
 $fila = ImagenesControlador::MostrarImagenes($_SESSION['log']["id_usuario"]);
 
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +36,7 @@ $fila = ImagenesControlador::MostrarImagenes($_SESSION['log']["id_usuario"]);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
     <title>MI ALBUM</title>
     <link rel="icon" href="img/icono.ico"/>
 </head>
@@ -51,7 +55,8 @@ $fila = ImagenesControlador::MostrarImagenes($_SESSION['log']["id_usuario"]);
           <li><a href="#" class="nav-link px-2 link-body-emphasis">Products</a></li> -->
         </ul>
 
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 justify-content-center" role="search">
+    
         <?php echo $_SESSION['log']['nombre']." ".$_SESSION['log']['apellido'];?>
         
         </form>
@@ -108,15 +113,15 @@ $fila = ImagenesControlador::MostrarImagenes($_SESSION['log']["id_usuario"]);
              
                 <div class="card shadow-sm">
                   
-                  <img src="img/Albums/<?php echo $p['imagen']?>" class="img-thumbnail" width="100%" height="70%">
+                  <img src="img/Albums/<?php echo $p['imagen']?>" class="card-img-top" width="600" height="400">
                   <div class="card-body">
                     <p class="card-text"><?php echo $p['comentario']?>.</p>
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
                         <a  class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#MODAL">Ver</a>
-                        <form action="" method="post">
-                        <input type="hidden" name="idEditar" value="<?php echo $p['idImagen']?>">
-                        <a  class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#ModalEditar">Editar</a>
+                        <form action="editarImagen.php" method="post">
+                        <input type="hidden" name="id" value="<?php echo $p['idImagen']?>">
+                        <button type="submit" class="btn btn-sm btn-outline-secondary">Editar</button>
                         </form>
                         
                         <form action="EliminarImagen.php" method="post">
@@ -200,48 +205,7 @@ $fila = ImagenesControlador::MostrarImagenes($_SESSION['log']["id_usuario"]);
         </div>
       </div>
       <!--Carrousel-->
-
-
-      <!--FinCarrousel-->
-      <!--FinModal-->
-      
-       <!--Modal Editar-->
-       <div class="modal" tabindex="1" id="ModalEditar">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Editar Imagen</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                   <form action="" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="">Imagen</label>
-                        <div class="mb-4 d-flex justify-content-center">
-                           
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            
-                                <input type="file" accept="image/*" class="form-control" name="Foto" id="" required>
-                            
-                        </div>
-                        <label for="">Comentario</label>
-                        <textarea name="cometario" id="" cols="30" rows="5" class="form-control"></textarea>
-                    </div>
-                   
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary">Cerrar</button>
-                    <button type="submit" name="SaveChages" class="btn btn-primary">Guardar cambios</button>
-                </div>
-                </form>
-            </div>
-        </div>
-      </div>
-      <!--Carrousel-->
-
-
-      <!--FinCarrousel-->
+>
       <!--FinModal-->
 
       <footer class="text-body-secondary py-5">
@@ -255,9 +219,7 @@ $fila = ImagenesControlador::MostrarImagenes($_SESSION['log']["id_usuario"]);
       </footer>
       
       
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-      crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
       
             
 </body>

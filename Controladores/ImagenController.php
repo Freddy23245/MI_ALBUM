@@ -14,16 +14,21 @@ class ImagenesControlador{
 
 
     }
-    public static function EditarImagenes($imagen,$comentario)
+    public static function EditarImagenes($id,$imagen,$comentario)
     {
         $obj_prod=new Imagenes();
 
+        $obj_prod->SetidImagen($id);
         $obj_prod->SetImagen($imagen);
         $obj_prod->SetComentario($comentario);
         
 
         return ImagenesDao::Editar($obj_prod);
 
+    }
+    public static function Get_Imagen($id)
+    {
+        return ImagenesDao::get_Imagen($id);
     }
     public static function MostrarImagenes($id)
     {

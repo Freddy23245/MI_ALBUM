@@ -83,6 +83,31 @@ class ImagenesDao extends Conexion{
         $resultado->execute();
     }
 
+    public static function get_Imagen($id)
+    {
+        $query="Select idImagen,imagen,comentario from imagenes where idImagen= :id";
+  
+        self::getConnection();
+  
+        $resultado=self::$con->prepare($query);
+        
+        $resultado->bindValue(":id",$id);
+
+        $resultado->execute();
+  
+        $filas = $resultado->fetch();
+        
+        $imagen = new Imagenes();
+
+        $imagen->SetidImagen($filas['idImagen']);
+        $imagen->SetImagen($filas['imagen']);
+        $imagen->SetComentario($filas['comentario']);
+
+        return $imagen;
+  
+    }
+
+
 }
 
 ?>

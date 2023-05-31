@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once("Controladores/ImagenController.php");
+
 $id = $_POST['id'];
 
 if (isset($_POST['SaveImage'])) {
@@ -18,8 +19,12 @@ if (isset($_POST['SaveImage'])) {
         $idUsuario = $_SESSION['log']["id_usuario"];
         echo "Identificador abajo";
         echo $idImagen;
-        ImagenesControlador::EditarImagenes($idImagen,$imagen,$comentario);        
+       
+       
+        ImagenesControlador::EditarImagenes($idImagen,$imagen,$comentario);   
+         
         header("location:inicio.php");
+        
     }
 
     

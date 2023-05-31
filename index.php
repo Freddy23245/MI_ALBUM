@@ -1,29 +1,37 @@
 <?php
  session_start();
   require_once("Controladores/UsuarioController.php");
+  $errors = array();
 if(isset($_POST['login'])){
   
   $usuario = $_POST['user'];
   $pass = $_POST['password'];
   $pass_hash=sha1($pass);
 
-  $resultado = UsuarioControlador::login($usuario,$pass_hash);
-  if($resultado)
-  {
-    $user = UsuarioControlador::get_usuario($usuario,$pass_hash);
+  $isNULL = UsuarioControlador::isNullLogin($usuario,$pass);
+ if($isNULL)
+ {
+    $errors[] = "Por favor Ingrese el usuario o la contraseña";
+ }
+ $resultado = UsuarioControlador::login($usuario,$pass_hash);
+ if($resultado)
+ {
+   $user = UsuarioControlador::get_usuario($usuario,$pass_hash);
 
-    $_SESSION['log'] = array(
-      "id_usuario"=>$user->GetIdUsuario(),
-      "nombre"=>$user->GetNombre(),
-      "apellido"=>$user->GetApellido(),
-      "correo"=>$user->GetCorreo(),
-      "usuario"=>$user->GetUsuario(),
-      "password"=>$user->GetContraseña(),
-      "imagen"=>$user->GetImagen(),
-    );
-    
-    header("location:inicio.php");
-  }
+   $_SESSION['log'] = array(
+     "id_usuario"=>$user->GetIdUsuario(),
+     "nombre"=>$user->GetNombre(),
+     "apellido"=>$user->GetApellido(),
+     "correo"=>$user->GetCorreo(),
+     "usuario"=>$user->GetUsuario(),
+     "password"=>$user->GetContraseña(),
+     "imagen"=>$user->GetImagen(),
+   );
+   
+   header("location:inicio.php");
+ }else{
+  $errors[] = "Usuario o contraseña Incorrectos";
+ }
 
 
 }
@@ -110,11 +118,12 @@ if(isset($_POST['login'])){
         <input type="password" class="form-control" name="password" placeholder="Password">
         <label for="floatingPassword">Contraseña</label>
       </div>
-  
+      <?php echo UsuarioControlador::resultBlock($errors); ?>
       <button class="w-100 btn btn-lg btn-primary" type="submit" name="login">Ingresar</button>
       <a href="registro.php">Sos Nuevo? Registrate Paaaadreeee ;)</a>
       <p class="mt-5 mb-6 text-body-secondary">&copy; 2017–2023</p>
     </form>
+    
   </main>
 
   

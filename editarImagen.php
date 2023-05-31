@@ -2,7 +2,6 @@
 session_start();
 require_once("Controladores/ImagenController.php");
 $id = $_POST['id'];
-var_dump($id);
 
 if (isset($_POST['SaveImage'])) {
 
@@ -14,14 +13,14 @@ if (isset($_POST['SaveImage'])) {
     if ($tempFoto != "") {
         move_uploaded_file($tempFoto, "img/Albums/" . $nombreArchivo);
     }
-
+    $idImagen = $_POST['ID'];
     $imagen = $nombreArchivo;
     $comentario = $_POST['comentarios'];
     $idUsuario = $_SESSION['log']["id_usuario"];
     echo "Identificador abajo";
-    echo $id;
-    ImagenesControlador::EditarImagenes(37,$imagen,$comentario);
-    // header("location:inicio.php");
+    echo $idImagen;
+    ImagenesControlador::EditarImagenes($idImagen,$imagen,$comentario);
+     header("location:inicio.php");
 }
 $img = ImagenesControlador::Get_Imagen($id);
 
@@ -59,8 +58,8 @@ $img = ImagenesControlador::Get_Imagen($id);
                 <!-- </div> -->
                 <label for="">Comentario</label>
                 <input type="text" name="comentarios" value="<?php echo $img->GetComentario(); ?>" class="form-control mb-4">
-
-                <button type="button" class="btn btn-secondary">Cerrar</button>
+                <input type="hidden" name="ID" value="<?php echo $img->GetidImagen()?>">
+                <a type="button" class="btn btn-secondary" href="inicio.php">Cerrar</a>
                 <button type="submit" name="SaveImage" class="btn btn-primary">Guardar cambios</button>
 
             </form>

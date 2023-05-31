@@ -66,7 +66,11 @@ $fila = ImagenesControlador::MostrarImagenes($_SESSION['log']["id_usuario"]);
             <img src="img/perf/<?php echo ($_SESSION['log']['imagen']);?>" alt="mdo" width="60" height="60" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small">
-            <li><a class="dropdown-item" href="perfil.php">Mi Perfil</a></li>
+            <form action="perfil.php" method="post">
+              <input type="hidden" name="idUsuario" value="<?php echo ($_SESSION['log']['id_usuario']);?>">
+              <li><button type="submit" class="dropdown-item">Mi Perfil</button></li>
+            </form>
+            
             <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Agregar Nueva Imagen</a></li>
             <!-- <li><a class="dropdown-item" href="#">Profile</a></li> -->
             <li><hr class="dropdown-divider"></li>
@@ -114,6 +118,7 @@ $fila = ImagenesControlador::MostrarImagenes($_SESSION['log']["id_usuario"]);
                 <div class="card shadow-sm">
                   
                   <img src="img/Albums/<?php echo $p['imagen']?>" class="card-img-top" width="600" height="400">
+                  <?php echo $p['imagen']?>
                   <div class="card-body">
                     <p class="card-text"><?php echo $p['comentario']?>.</p>
                     <div class="d-flex justify-content-between align-items-center">

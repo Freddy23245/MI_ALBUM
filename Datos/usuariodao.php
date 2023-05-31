@@ -112,7 +112,37 @@ require_once("Datos/Conexion.php");
         return $usuario;
 
     }
+    public static function get_Usuario_ID($id)
+    {
+        $query="select * from usuarios where id_usuario = :id_usuario";
 
+        self::getConnection();
+
+        $resultado=self::$con->prepare($query);
+
+        $resultado->bindValue(":id_usuario",$id);
+       
+
+        $resultado->execute();
+
+    
+
+            $filas=$resultado->fetch();
+
+            $usuario=new Usuarios();
+
+            $usuario->SetIdUsuario($filas["id_usuario"]);
+            $usuario->SetNombre($filas["nombre"]);
+            $usuario->SetApellido($filas["apellido"]);
+            $usuario->SetCorreo($filas["correo"]);
+            $usuario->SetUsuario($filas["usuario"]);
+            $usuario->SetContraseña($filas["password"]);
+            $usuario->SetImagen($filas["imagen"]);
+
+
+        return $usuario;
+
+    }
 
 
     }

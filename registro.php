@@ -1,6 +1,6 @@
 <?php 
 require("Controladores/UsuarioController.php");
-
+$errors =array();
 if(isset($_POST['Guardar'])){
   $fecha = new DateTime();
   $nombreArchivo =($_FILES['Imagen'] != "")?$fecha->getTimestamp()."_".$_FILES['Imagen']["name"]:"default.png";
@@ -22,8 +22,31 @@ $imagen = $nombreArchivo;
 // $Activo=1;
 
 $pass_hash=sha1($password);
-UsuarioControlador::Insertar($nombre,$apellido,$correo,$usuario,$pass_hash,$imagen);
-header("location:registro.php");
+
+
+$VALIDAPASS = UsuarioControlador::validaPassword($password,$con_password);
+$ISNULL = UsuarioControlador::isNull($nombre,$apellido,$usuario,$password,$con_password,$email);
+$ISEMAIL = UsuarioControlador::isEmail($email);
+if($ISNULL)
+{
+  $errors[] = "Por Favor Rellene los campos solicitados";
+}
+if(!$ISEMAIL)
+{
+  $errors[] = "Correo Invalido";
+}
+if(!$VALIDAPASS)
+{
+  $errors[]= "Verifique que las contraseña coincidan";
+}
+
+if(count($errors)==0)
+{
+  UsuarioControlador::Insertar($nombre,$apellido,$correo,$usuario,$pass_hash,$imagen);
+  header("location:registro.php");
+}
+
+
 }
 
 
@@ -44,6 +67,7 @@ header("location:registro.php");
       
           <div class="container">
             <h4>Registro de Usuario</h4>
+            <?php echo UsuarioControlador::resultBlock($errors); ?>
             <form action="" method="post" class="" enctype="multipart/form-data">
               <div class="mb-3 col-md-6">
                

@@ -43,5 +43,9 @@ class ImagenesControlador{
         return ImagenesDao::Eliminar($obj_prod);
 
     }
+    public static function Get_Imagen_ID($id)
+    {
+        return ImagenesDao::get_Imagen_id($id);
+    }
 }
 ?>

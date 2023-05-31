@@ -5,22 +5,25 @@ $id = $_POST['id'];
 
 if (isset($_POST['SaveImage'])) {
 
-
+    
     // $imagen = $_FILES['Foto']['name'];
     $fecha = new DateTime();
     $nombreArchivo = ($_FILES['FotoEditar'] != "") ? $fecha->getTimestamp() . "_" . $_FILES['FotoEditar']["name"] : "imagen.jpg";
     $tempFoto = $_FILES['FotoEditar']['tmp_name'];
     if ($tempFoto != "") {
         move_uploaded_file($tempFoto, "img/Albums/" . $nombreArchivo);
+        $idImagen = $_POST['ID'];
+        $imagen = $nombreArchivo;
+        $comentario = $_POST['comentarios'];
+        $idUsuario = $_SESSION['log']["id_usuario"];
+        echo "Identificador abajo";
+        echo $idImagen;
+        ImagenesControlador::EditarImagenes($idImagen,$imagen,$comentario);        
+        header("location:inicio.php");
     }
-    $idImagen = $_POST['ID'];
-    $imagen = $nombreArchivo;
-    $comentario = $_POST['comentarios'];
-    $idUsuario = $_SESSION['log']["id_usuario"];
-    echo "Identificador abajo";
-    echo $idImagen;
-    ImagenesControlador::EditarImagenes($idImagen,$imagen,$comentario);
-     header("location:inicio.php");
+
+    
+     
 }
 $img = ImagenesControlador::Get_Imagen($id);
 
